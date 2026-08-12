@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RAGBOT — an AI reading companion</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="app">
+      <!-- ============ HEADER ============ -->
+      <header class="app-header">
+        <div class="brand">
+          <span class="brand-mark">RG</span>
+          <div class="brand-text">
+            <h1>RAGBOT</h1>
+            <p>an AI reading companion for research papers</p>
+          </div>
+        </div>
+        <div class="doc-badge" id="docBadge" hidden>
+          <span class="doc-badge-dot"></span>
+          <span id="docBadgeName">—</span>
+        </div>
+      </header>
+
+      <div class="app-body">
+        <!-- ============ SIDEBAR ============ -->
+        <aside class="sidebar">
+          <!-- Upload zone (shown before a paper is loaded) -->
+          <section class="panel" id="uploadPanel">
+            <h2 class="panel-title">01 — Upload</h2>
+            <label class="dropzone" id="dropzone" for="fileInput">
+              <input
+                type="file"
+                id="fileInput"
+                accept="application/pdf"
+                hidden
+              />
+              <span class="dropzone-icon">⤒</span>
+              <span class="dropzone-text"
+                >Drop a PDF here, or click to choose one</span
+              >
+              <span class="dropzone-sub"
+                >The paper stays on your machine — nothing leaves this
+                app.</span
+              >
+            </label>
+            <div class="upload-status" id="uploadStatus" hidden></div>
+          </section>
+
+          <!-- Document card (shown after a paper is loaded) -->
+          <section class="panel" id="docPanel" hidden>
+            <h2 class="panel-title">01 — Document</h2>
+            <div class="doc-card">
+              <p class="doc-card-name" id="docName">—</p>
+              <dl class="doc-card-stats">
+                <div>
+                  <dt>Pages</dt>
+                  <dd id="docPages">—</dd>
+                </div>
+                <div>
+                  <dt>Chunks indexed</dt>
+                  <dd id="docChunks">—</dd>
+                </div>
+              </dl>
+              <button class="btn btn-ghost" id="removeDocBtn">
+                Remove &amp; upload another
+              </button>
+            </div>
+          </section>
+
+          <!-- Tab navigation -->
+          <nav class="panel tabnav" id="tabNav">
+            <h2 class="panel-title">02 — Explore</h2>
+            <button class="tab-btn active" data-tab="chat">
+              <span class="tab-btn-index">i.</span> Chat with the paper
+            </button>
+            <button class="tab-btn" data-tab="blog">
+              <span class="tab-btn-index">ii.</span> Plain-English blog
+            </button>
+            <button class="tab-btn" data-tab="glossary">
+              <span class="tab-btn-index">iii.</span> Glossary
+            </button>
+          </nav>
+        </aside>
+
+        <!-- ============ MAIN WORKSPACE ============ -->
+        <main class="workspace">
+          <!-- Empty state before upload -->
+          <section class="empty-state" id="emptyState">
+            <p class="empty-state-glyph">✎</p>
+            <h2>Upload a paper to begin</h2>
+            <p>
+              Once it's indexed, you can chat with it, get a plain-English
+              summary, or pull an auto-generated glossary of its key terms.
+            </p>
+          </section>
+
+          <!-- CHAT TAB -->
+          <section class="tab-panel" id="tab-chat" hidden>
+            <div class="chat-log" id="chatLog">
+              <div class="chat-hint">
+                Ask something like
+                <em>"What dataset did the authors use?"</em> or
+                <em>"Summarize the method in Section 3."</em>
+              </div>
+            </div>
+            <form class="chat-input-row" id="chatForm">
+              <input
+                type="text"
+                id="chatInput"
+                placeholder="Ask a question about this paper…"
+                autocomplete="off"
+              />
+              <button type="submit" class="btn btn-primary" id="chatSendBtn">
+                Ask
+              </button>
+            </form>
+          </section>
+
+          <!-- BLOG TAB -->
+          <section class="tab-panel" id="tab-blog" hidden>
+            <div class="tab-toolbar">
+              <p class="tab-toolbar-label">
+                Translate the paper into a friendly explainer.
+              </p>
+              <button class="btn btn-primary" id="generateBlogBtn">
+                Generate blog post
+              </button>
+            </div>
+            <article class="blog-output" id="blogOutput">
+              <p class="placeholder-text">
+                Nothing generated yet — click "Generate blog post" above.
+              </p>
+            </article>
+          </section>
+
+          <!-- GLOSSARY TAB -->
+          <section class="tab-panel" id="tab-glossary" hidden>
+            <div class="tab-toolbar">
+              <p class="tab-toolbar-label">
+                Pull out the paper's key terms, defined simply.
+              </p>
+              <button class="btn btn-primary" id="generateGlossaryBtn">
+                Generate glossary
+              </button>
+            </div>
+            <div class="glossary-output" id="glossaryOutput">
+              <p class="placeholder-text">
+                Nothing generated yet — click "Generate glossary" above.
+              </p>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

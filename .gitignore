@@ -1,0 +1,18 @@
+# Secrets — never commit these
+.env
+*.env
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+venv/
+.venv/
+
+# App data (uploaded PDFs, FAISS indexes — regenerated at runtime)
+backend/data/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/

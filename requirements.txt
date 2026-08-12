@@ -1,0 +1,24 @@
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch==2.4.1
+
+fastapi==0.115.0
+uvicorn[standard]==0.30.6
+python-multipart==0.0.9
+pydantic==2.9.2
+python-dotenv==1.0.1
+
+# PDF parsing
+pypdf==4.3.1
+
+# RAG stack
+langchain==0.3.1
+langchain-community==0.3.1
+langchain-huggingface==0.1.0
+langchain-groq==0.2.0
+langchain-ollama==0.2.0
+langchain-text-splitters==0.3.0
+huggingface_hub==0.25.1
+
+# Embeddings + vector store
+sentence-transformers==3.1.1
+faiss-cpu==1.8.0.post1
