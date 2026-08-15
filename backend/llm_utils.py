@@ -165,3 +165,25 @@ GLOSSARY_PROMPT = ChatPromptTemplate.from_messages(
         ),
     ]
 )
+
+RAG_CHAT_PROMPT = ChatPromptTemplate.from_messages(
+    [
+        (
+            "system",
+            "You are a helpful research assistant answering questions about a "
+            "specific paper. Answer ONLY using the provided context excerpts from "
+            "the paper. If the answer isn't in the context, say you can't find "
+            "that in the paper rather than guessing or using outside knowledge. "
+            "Use the conversation history to resolve follow-up questions (e.g. "
+            "'it', 'that', 'compare it with the previous answer'). Be concise "
+            "and cite specific details from the context where relevant.",
+        ),
+        (
+            "human",
+            "Conversation so far:\n{chat_history}\n\n"
+            "Context excerpts from the paper:\n{context}\n\n"
+            "Question: {question}\n\n"
+            "Answer using only the context above.",
+        ),
+    ]
+)
